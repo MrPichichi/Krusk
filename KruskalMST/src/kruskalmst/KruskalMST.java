@@ -20,6 +20,50 @@ public class KruskalMST {
     public int numAristas;
     public Edge aristas[];
     
+        /**
+     * @param args the command line arguments
+     * @throws java.io.FileNotFoundException
+     */
+    public static void main(String[] args) throws FileNotFoundException, IOException {
+        // TODO code application logic here
+        KruskalMST kmst= new KruskalMST();
+        File construccion = new File(args[0]);
+        BufferedReader reader = new BufferedReader(new FileReader(construccion));    
+        String linea = "";
+        int cantidadNodos = 0;
+        int contador = 0;
+        
+        while((linea = (String) reader.readLine()) != null){
+            if(contador == 0){
+                kmst.numNodos = Integer.parseInt(linea);
+            }
+            else if (contador >=1 && contador <=cantidadNodos){
+                String[] coord = linea.split(" ");
+                Node n = new Node(Integer.parseInt(coord[0]),
+                        Double.parseDouble(coord[1]),Double.parseDouble(coord[2]),contador-1);
+                kmst.nodos[contador-1] = n;
+            }
+            else{
+                String[] coord = linea.split(" ");
+                Node n1 = new Node(0,0,0,0);
+                Node n2 = new Node(0,0,0,0);
+                int pos = 0;
+                for(int i = 0;i<kmst.numNodos;i++){
+                    if(kmst.nodos[i].getIdentificador() == Integer.parseInt(coord[0])){
+                        n1 = kmst.nodos[i];
+                    }
+                    else if (kmst.nodos[i].getIdentificador() == Integer.parseInt(coord[1])){
+                        n2 = kmst.nodos[i];
+                    }
+                    
+                }
+                kmst.aristas[pos++]= new Edge(n1.getPosEntrada(),n2.getPosEntrada(),n1.calcularDistancia(n2));
+            }
+            contador++;
+        }
+        kmst.MST();
+    }
+    
     public KruskalMST(){
         this.numAristas = 0;
         this.numNodos = 0;
@@ -94,50 +138,5 @@ public class KruskalMST {
             total+=e.peso;
         }
         System.out.println("Se necesitan "+total+" unidades de cable");
-    }
-        
-    /**
-     * @param args the command line arguments
-     * @throws java.io.FileNotFoundException
-     */
-    public static void main(String[] args) throws FileNotFoundException, IOException {
-        // TODO code application logic here
-        KruskalMST kmst= new KruskalMST();
-        File construccion = new File(args[0]);
-        BufferedReader reader = new BufferedReader(new FileReader(construccion));    
-        String linea = "";
-        int cantidadNodos = 0;
-        int contador = 0;
-        
-        while((linea = (String) reader.readLine()) != null){
-            if(contador == 0){
-                kmst.numNodos = Integer.parseInt(linea);
-            }
-            else if (contador >=1 && contador <=cantidadNodos){
-                String[] coord = linea.split(" ");
-                Node n = new Node(Integer.parseInt(coord[0]),
-                        Double.parseDouble(coord[1]),Double.parseDouble(coord[2]),contador-1);
-                kmst.nodos[contador-1] = n;
-            }
-            else{
-                String[] coord = linea.split(" ");
-                Node n1 = new Node(0,0,0,0);
-                Node n2 = new Node(0,0,0,0);
-                int pos = 0;
-                for(int i = 0;i<kmst.numNodos;i++){
-                    if(kmst.nodos[i].getIdentificador() == Integer.parseInt(coord[0])){
-                        n1 = kmst.nodos[i];
-                    }
-                    else if (kmst.nodos[i].getIdentificador() == Integer.parseInt(coord[1])){
-                        n2 = kmst.nodos[i];
-                    }
-                    
-                }
-                kmst.aristas[pos++]= new Edge(n1.getPosEntrada(),n2.getPosEntrada(),n1.calcularDistancia(n2));
-            }
-            contador++;
-        }
-        kmst.MST();
-    }
-    
+    }        
 }
