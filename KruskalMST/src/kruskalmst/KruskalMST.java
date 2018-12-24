@@ -11,7 +11,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 
 public class KruskalMST {
@@ -67,7 +66,6 @@ public class KruskalMST {
             }
             contador++;
         }
-        int aux=0;
         int j = 0;
         kmst.aristas = new Edge[e.size()];
         while(true){
@@ -121,7 +119,6 @@ public class KruskalMST {
         for(i=0;i<numNodos; i++){
             mst[i] = new Edge();
         }
-        //Arrays.sort(aristas);
         ordenar();
         
         
