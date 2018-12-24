@@ -6,7 +6,7 @@
 package kruskalmst;
 
 
-public class Edge implements Comparable<Edge> {
+public class Edge  {
     
     int source;
     int destiny;
@@ -22,16 +22,8 @@ public class Edge implements Comparable<Edge> {
     }
 
 
-    @Override
-    public int compareTo(Edge t) {
-        double dif = peso- t.peso;
-        if(dif >0){
-            return 1;
-        }
-        else if (dif<0){
-            return -1;
-        }
-        return 0;
+    public Double compareTo(Edge t) {
+        return this.peso-t.peso;
     }
     
     

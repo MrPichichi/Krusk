@@ -11,7 +11,10 @@ public class Node {
     private double coordX;
     private double coordY;
     private int posEntrada;
-
+    
+    public Node(){
+        
+    }
     public Node(int identificador, double coordX, double coordY,int posEntrada) {
         this.identificador = identificador;
         this.coordX = coordX;
